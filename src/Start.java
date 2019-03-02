@@ -23,6 +23,7 @@ public class Start {
                         System.out.println( "Deq`s numbers : " + i + " " + i);
                         deq[i].print();
                         deq[i].print();
+
                     }
                 }
             }
