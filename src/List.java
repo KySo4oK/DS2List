@@ -4,6 +4,9 @@ public class List {
     int num=0;
 
     List(List a) {
+        ListElement front = null;
+        ListElement back = null;
+        int num=0;
         List a1 = new List();
         ListElement temp;
         ListElement temp1;
@@ -24,7 +27,11 @@ public class List {
             push_back(temp[(int)(Math.random()*10)]);
         }
     }
-    List(){}
+    List(){
+        ListElement front = null;
+        ListElement back = null;
+        int num=0;
+    }
 
     void push_front(ListElement a) {
         if (isEmpty()){
