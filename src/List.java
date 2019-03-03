@@ -4,11 +4,16 @@ public class List {
     int num=0;
 
     List(List a) {
-        ListElement temp = a.front;
-        while (temp!=null) {
-            push_front(new ListElement(temp));
-            temp = temp.prev;
+        List a1 = new List();
+        ListElement temp;
+        ListElement temp1;
+        while (!a.isEmpty()){
+            temp1 =a.pop_front();
+            temp =  new ListElement(temp1);
+            push_back(temp);
+            a1.push_back(temp1);
         }
+        a=a1;
     }
     List(int k) {
         ListElement[] temp = new ListElement[10];
@@ -19,6 +24,7 @@ public class List {
             push_back(temp[(int)(Math.random()*10)]);
         }
     }
+    List(){}
 
     void push_front(ListElement a) {
         if (isEmpty()){
@@ -53,7 +59,6 @@ public class List {
         if(front.prev!=null) {
             front = front.prev;
             front.next = null;
-
         } else {
             front = null;
         }
