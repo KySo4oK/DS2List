@@ -3,81 +3,72 @@ public class List {
     ListElement back = null;
     int num=0;
 
-    List(List a) {
-        ListElement front = null;
-        ListElement back = null;
-        int num=0;
+    List copyList(List a) {
         List a1 = new List();
+        List copyls = new List();
         ListElement temp;
-        ListElement temp1;
         while (!a.isEmpty()){
-            temp1 =a.pop_front();
-            temp =  new ListElement(temp1);
-            push_back(temp);
-            a1.push_back(temp1);
+            temp =a.pop_front();
+            copyls.push_back(temp.data);
+            a1.push_back(temp.data);
         }
-        a=a1;
-    }
-    List(int k) {
-        ListElement[] temp = new ListElement[10];
-        for(int i=0; i<10; i++){
-            temp[i] = new ListElement(i);
-        }
-        for(int i=0; i<k; i++){
-            push_back(temp[(int)(Math.random()*10)]);
-        }
-    }
-    List(){
-        ListElement front = null;
-        ListElement back = null;
-        int num=0;
+        a.front =  a1.front;
+        a.back = a1.back;
+        a.num =a1.num;
+        return copyls;
     }
 
-    void push_front(ListElement a) {
+    List(){}
+
+    void push_front(int a1) {
+        ListElement a = new ListElement(a1);
         if (isEmpty()){
-            front = a;
             back = a;
+            front = a;
             a.next = null;
             a.prev = null;
         } else {
-            a.prev = front;
-            a.next = null;
+            front.prev = a;
+            a.next = front;
+            a.prev = null;
             front = a;
         }
         num++;
     }
 
-    void push_back(ListElement a) {
+    void push_back(int a1) {
+        ListElement a = new ListElement(a1);
         if (isEmpty()){
             front = a;
             back = a;
             a.next = null;
             a.prev = null;
         } else {
-            a.next = back;
-            a.prev = null;
+            back.next = a;
+            a.prev = back;
+            a.next = null;
             back = a;
         }
         num++;
     }
 
     ListElement pop_front(){
-        ListElement temp = front;
-        if(front.prev!=null) {
-            front = front.prev;
-            front.next = null;
+        ListElement temp = new ListElement(front.data);
+        if (front.next != null) {
+                front = front.next;
+                front.prev = null;
         } else {
-            front = null;
+                front = null;
         }
         num--;
         return temp;
     }
 
     ListElement pop_back(){
-        ListElement temp = back;
-        if(back.next!=null) {
-            back = back.next;
-            back.prev = null;
+        ListElement temp = new ListElement(back.data);
+        if(back.prev!=null) {
+            back = back.prev;
+            back.next = null;
 
         } else {
             back = null;
@@ -90,7 +81,7 @@ public class List {
         ListElement temp = front;
         while (temp!=null) {
             System.out.print(temp.data + " ");
-            temp = temp.prev;
+            temp = temp.next;
         }
         System.out.println("");
     }

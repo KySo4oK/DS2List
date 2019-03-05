@@ -3,38 +3,34 @@ import java.util.Scanner;
 public class Start {
     public static void main(String args[]) {
         Scanner scan = new Scanner(System.in);
-        System.out.println("Input number of deq");
+        System.out.println("Input quantity of deq");
         int n = scan.nextInt();
-        System.out.println("Input number of element");
+        System.out.println("Input quantity of element");
         int k = scan.nextInt();
         List[] deq = new List[n];
         for (int i = 0; i < n; i++) {
-            deq[i] = new List(k);
+            deq[i] = fillList(k);
         }
         createPoint(n);
+
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                if(i!=j&&checkPoint(i,j)&&invertEq(deq[i],deq[j])){
+                if(checkPoint(i,j)&&invertEq(deq[i],deq[j])){
                     System.out.println( "Deq`s numbers : " + i + " " + j);
                     deq[i].print();
                     deq[j].print();
-                } else if (i==j) {
-                    if(checkPoint(i,i)&&invertEq(deq[i],deq[j])){
-                        System.out.println( "Deq`s numbers : " + i + " " + i);
-                        deq[i].print();
-                        deq[i].print();
-
-                    }
                 }
             }
         }
     }
     public static boolean invertEq(List deq1, List deq2) {
-        List deque1 = new List(deq1);
-        List deque2 = new List(deq2);
-        if(deque1.size()==deque2.size()){
+        List deque1 = new List();
+        List deque2 = new List();
+        deque1 = deque1.copyList(deq1);
+         deque2 = deque2.copyList(deq2);
+        if(deque1.size() == deque2.size()){
             while(!deque1.isEmpty()&&!deque2.isEmpty()) {
-                if(deque1.pop_front()!=deque2.pop_back()){
+                if(deque1.pop_front().data!=deque2.pop_back().data){
                     return false;
                 }
             }
@@ -42,18 +38,26 @@ public class Start {
         } else return false;
     }
 
-    static boolean[][] point;
+    public static List fillList(int quan){
+        List a = new List();
+        for(int i = 0 ; i < quan ; i++ ){
+            a.push_back((int)(Math.random()*10));
+        }
+        return a;
+    }
+
+    static boolean[][] points;
     public static void createPoint(int n){
-        point = new boolean[n][n];
+        points = new boolean[n][n];
         for (int i=0;i<n;i++){
             for (int j=0;j<n;j++){
-                point[i][j]= true;
+                points[i][j]= true;
             }
         }
     }
     public static boolean checkPoint(int i, int j) {
-        if(point[i][j]&&point[j][i]) {
-            point[i][j] = false;
+        if(points[i][j]&&points[j][i]) {
+            points[i][j] = false;
             return true;
         } return false;
     }
