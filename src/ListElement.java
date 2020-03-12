@@ -31,7 +31,4 @@ public class ListElement {
         this.data = data;
     }
 
-    public ListElement(ListElement a) {
-        data = a.data;
-    }
 }

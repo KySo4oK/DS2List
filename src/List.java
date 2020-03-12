@@ -84,7 +84,7 @@ public class List {
             System.out.print(temp.getData() + " ");
             temp = temp.getNext();
         }
-        System.out.println("");
+        System.out.println();
     }
 
     public int size() {
