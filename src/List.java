@@ -1,74 +1,75 @@
 public class List {
     ListElement front = null;
     ListElement back = null;
-    int num=0;
+    int num = 0;
 
-    List copyList(List a) {
+    List getCopyOfList(List a) {
         List a1 = new List();
         List copyls = new List();
         ListElement temp;
-        while (!a.isEmpty()){
-            temp =a.pop_front();
-            copyls.push_back(temp.data);
-            a1.push_back(temp.data);
+        while (!a.isEmpty()) {
+            temp = a.pop_front();
+            copyls.push_back(temp.getData());
+            a1.push_back(temp.getData());
         }
-        a.front =  a1.front;
+        a.front = a1.front;
         a.back = a1.back;
-        a.num =a1.num;
+        a.num = a1.num;
         return copyls;
     }
 
-    List(){}
+    List() {
+    }
 
-    void push_front(int a1) {
+    public void push_front(int a1) {
         ListElement a = new ListElement(a1);
-        if (isEmpty()){
+        if (isEmpty()) {
             back = a;
             front = a;
-            a.next = null;
-            a.prev = null;
+            a.setNext(null);
+            a.setPrev(null);
         } else {
-            front.prev = a;
-            a.next = front;
-            a.prev = null;
+            front.setPrev(a);
+            a.setNext(front);
+            a.setPrev(null);
             front = a;
         }
         num++;
     }
 
-    void push_back(int a1) {
+    public void push_back(int a1) {
         ListElement a = new ListElement(a1);
-        if (isEmpty()){
+        if (isEmpty()) {
             front = a;
             back = a;
-            a.next = null;
-            a.prev = null;
+            a.setNext(null);
+            a.setPrev(null);
         } else {
-            back.next = a;
-            a.prev = back;
-            a.next = null;
+            back.setNext(a);
+            a.setPrev(back);
+            a.setNext(null);
             back = a;
         }
         num++;
     }
 
-    ListElement pop_front(){
-        ListElement temp = new ListElement(front.data);
-        if (front.next != null) {
-                front = front.next;
-                front.prev = null;
+    public ListElement pop_front() {
+        ListElement temp = new ListElement(front.getData());
+        if (front.getNext() != null) {
+            front = front.getNext();
+            front.setPrev(null);
         } else {
-                front = null;
+            front = null;
         }
         num--;
         return temp;
     }
 
-    ListElement pop_back(){
-        ListElement temp = new ListElement(back.data);
-        if(back.prev!=null) {
-            back = back.prev;
-            back.next = null;
+    public ListElement pop_back() {
+        ListElement temp = new ListElement(back.getData());
+        if (back.getPrev() != null) {
+            back = back.getPrev();
+            back.setNext(null);
 
         } else {
             back = null;
@@ -77,22 +78,26 @@ public class List {
         return temp;
     }
 
-    void print() {
+    public void print() {
         ListElement temp = front;
-        while (temp!=null) {
-            System.out.print(temp.data + " ");
-            temp = temp.next;
+        while (temp != null) {
+            System.out.print(temp.getData() + " ");
+            temp = temp.getNext();
         }
         System.out.println("");
     }
 
-    int size(){ return num; }
-
-    void clear() {
-        front =null;
-        back = null;
-        num=0;
+    public int size() {
+        return num;
     }
 
-    boolean isEmpty() { return num==0; }
+    public void clear() {
+        front = null;
+        back = null;
+        num = 0;
+    }
+
+    public boolean isEmpty() {
+        return num == 0;
+    }
 }
